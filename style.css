@@ -1,29 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-.titulo {
-  padding: 15px;
-  width: 30vw;
-  margin: auto;
-
+body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    background-color: #F3F5FC;
+    color: #0A3871;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+}
+#logo{
+    margin:1.8vmax;
 }
 
-.btn {
-  border: 0;
-  color: white;
-  font-weight: bold;
-  background-color: blue;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 0.5em;
+.container{
+  margin: 0.5vmin;
+  align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: fit-content;
 }
-
-.text-input {
-  border-radius: 0.5em;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  display: block;
-  padding: 0.5em;
+#forca{
   width: 30%;
-  height: 50px;
-  margin-left: auto;
-  margin-right: auto;
+  height: 30%;
+}
+input{
+  width:fit-content
+}
+
+button{
+    border-radius: 1vmax;
+    padding:1vmax;
+    width: fit-content;
+    color: #0A3871;
+    background-color: #D8DFE8;
+    border-color: #0A3871;
+    margin: 1vmin;
+}
+button:hover{
+    scale: 0.95;
+}
+
+footer{
+    padding: 1vmax;
+    margin: 0;
+    padding-bottom: 0;
+}
+footer h2{
+    font-size: 1.2vmax;
+}
+footer p{
+    font-size: 1vmax;
 }

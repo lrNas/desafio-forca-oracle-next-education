@@ -12,6 +12,7 @@ function nextWord(x, y, scale) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawText("Sucesso!", mainx, y, scale, fontSize, messagePosition,'red')
         exibitionSwitch();
+        iniciar.disabled=true
         gameOver = true
         success = true
     }
@@ -42,6 +43,7 @@ function startChecker(x, y, scale) {
             palavras = []
             // função game over
             if(!success){
+                iniciar.disabled=true
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawText("Você perdeu!", mainx, y, scale, fontSize, messagePosition,'red')
             }
@@ -112,10 +114,11 @@ function getIndexes(array, element) {
 
 document.addEventListener("keypress", async event => {
     // colocar uppercase
-    let letter = event.key
+    let letter = event.key.toUpperCase()
     if (!gameOver) {
         let current = rightChars.indexOf(letter)
-        if(current<0){
+        let erro = errors.indexOf(letter)
+        if(current<0&& erro<0){
             let indexes = getIndexes(palavras[actualWord], letter)
             for (index of indexes) {
                 if (index > -1 ) {
@@ -136,10 +139,14 @@ document.addEventListener("keypress", async event => {
 })
 
 adicionarPalavra.addEventListener("click", () => {
-    // remover acentos e colocar tudo lowercase
-    palavras.push(input.value)
+    // remover acentos
+    // desabilitar botão iniciar jogo se não tiver palavras cadastradas
+    let texto = input.value.toUpperCase()
     input.value = ""
-    console.log(palavras)
+    if(!(texto=="")){
+        iniciar.disabled = false
+        palavras.push(texto)
+    }
 })
 
 

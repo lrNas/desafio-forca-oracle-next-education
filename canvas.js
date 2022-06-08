@@ -80,7 +80,7 @@ function drawText(text, x, y, scale, size, index,color='black') {
     let calcPosition = index - 1
     let calcx = x + ((60 * scale) * calcPosition) + (index ? (5 * scale) : 0)
     let calcy = y + (55 * scale)
-    ctx.font = (size * scale) + 'px '+fontStyle;
+    ctx.font = (size * scale) + 'em '+fontStyle;
     ctx.fillText(text, calcx, calcy);
     ctx.closePath();
 
@@ -89,7 +89,7 @@ function cleanText(x, y, word, scale) {
     size = word.length
     let chars = size >= errors.length ? size+1 : errors.length+1
     
-    ctx.clearRect(x - (60 * scale), y - (10 * scale), (2 * fontSize * chars * scale), (fontSize * 4 * scale));
+    ctx.clearRect(x - (60 * scale), y - (10 * scale), (48 * fontSize * chars * scale), (fontSize * 96 * scale));
     errors = []
     currentRightChars = 0;
     draw = true
