@@ -10,7 +10,10 @@ function nextWord(x, y, scale) {
         points = 0
         draw = false
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawText("Sucesso!", mainx, y, scale, fontSize, messagePosition,'red')
+        alert("Você venceu!")
+        lista.style.display="flex"
+        canvas.style.display="none"
+        lista.innerHTML=""
         exibitionSwitch();
         iniciar.disabled=true
         gameOver = true
@@ -22,7 +25,7 @@ function nextWord(x, y, scale) {
         console.log(word)
         console.log(size)
         for (let i = 0; i < size; i++) {
-            drawUnderline(x, y, scale, i)
+            drawUnderline(x, y, scale, i,strokeColor)
         }
     }
 }
@@ -45,9 +48,12 @@ function startChecker(x, y, scale) {
             if(!success){
                 iniciar.disabled=true
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                drawText("Você perdeu!", mainx, y, scale, fontSize, messagePosition,'red')
+                alert("Game over!")
             }
             gameOver=false
+            canvas.style.display="none"
+        lista.style.display="flex"
+            lista.innerHTML=""
             exibitionSwitch();
             clearInterval(checker);
         }
@@ -60,20 +66,20 @@ function startChecker(x, y, scale) {
         if (draw) {
             switch (item) {
                 case 6:
-                    drawArmLeg(x, y + (30 * scale), "l", scale)
+                    drawArmLeg(x, y + (30 * scale), "l", scale,strokeColor)
                     gameOver = true;
                 case 5:
-                    drawArmLeg(x, y + (30 * scale), "r", scale)
+                    drawArmLeg(x, y + (30 * scale), "r", scale,strokeColor)
                 case 4:
-                    drawArmLeg(x, y, "l", scale)
+                    drawArmLeg(x, y, "l", scale,strokeColor)
                 case 3:
-                    drawArmLeg(x, y, "r", scale)
+                    drawArmLeg(x, y, "r", scale,strokeColor)
                 case 2:
-                    drawBody(x, y, scale)
+                    drawBody(x, y, scale,strokeColor)
                 case 1:
-                    drawHead(x, y, scale)
+                    drawHead(x, y, scale,strokeColor)
                 case 0:
-                    drawCadafalso(x, y, scale);
+                    drawCadafalso(x, y, scale,strokeColor);
                     break;
             }
             draw = false;
@@ -84,9 +90,11 @@ function startChecker(x, y, scale) {
 
 function startGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.style.display="flex"
     // limpar mensagem
     // zerar variáveis
     errors = [];
+    lista.style.display="none"
     draw = true;
     actualWord = -1
     erroLetterIndex = 0
@@ -122,7 +130,7 @@ document.addEventListener("keypress", async event => {
             let indexes = getIndexes(palavras[actualWord], letter)
             for (index of indexes) {
                 if (index > -1 ) {
-                    drawText(letter, mainx, mainy, scale, fontSize, index)
+                    drawText(letter, mainx, mainy, scale, fontSize, index, strokeColor)
                     rightChars.push(letter)
                     currentRightChars++
                 }
@@ -145,6 +153,9 @@ adicionarPalavra.addEventListener("click", () => {
     input.value = ""
     if(!(texto=="")){
         iniciar.disabled = false
+        var li = document.createElement("li");
+        li.textContent=texto
+        lista.appendChild(li);
         palavras.push(texto)
     }
 })

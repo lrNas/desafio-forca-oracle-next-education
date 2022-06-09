@@ -10,72 +10,72 @@ function fillstroke(color) {
 }
 
 function drawCircle(raio, x, y, color) {
+    ctx.fillStyle = color
     ctx.moveTo(0, 0);
     ctx.beginPath();
-    ctx.fillStyle = color;
-    // Para Circulos
-    // Inicia caminho de um circulo
-    ctx.beginPath();
-    // Define o círculo como iniciando em 100X, 50Y, 20 de raio. angulo inicial 0, angulo final 2*pi (angulos em rad)
-    ctx.arc(x, y, raio, 0, Math.PI * 2);
-    // Fecha o circulo
+    ctx.beginPath();ctx.arc(x, y, raio, 0, Math.PI * 2);
     fillstroke(color);
     ctx.closePath();
 }
 
 function drawLine(xinicio, yinicio, xfim, yfim, color) {
     ctx.beginPath();
-    ctx.fillStyle = color
+    ctx.strokeStyle = color
     ctx.moveTo(xinicio, yinicio)
     ctx.lineTo(xfim, yfim);
     ctx.stroke();
     ctx.closePath();
+    
 }
 
-function drawHead(x, y, scale) {
+function drawHead(x, y, scale,color) {
     ctx.beginPath();
-    drawCircle(10 * scale, x - (20 * scale), y - (80 * scale), "black")
-    drawCircle(8 * scale, x - (20 * scale), y - (80 * scale), "white")
+    drawCircle(10 * scale, x - (20 * scale), y - (80 * scale), color)
+    drawCircle(8 * scale, x - (20 * scale), y - (80 * scale), "#F3F5FC")
+    ctx.closePath();
+    ctx.fillStyle = color;
+}
+
+function drawCadafalso(x, y, scale,color) {
+    ctx.strokeStyle = color
+    ctx.beginPath();
+    drawLine(x, y, x - (100 * scale), y, color)
+    drawLine(x - (80 * scale), y, x - (80 * scale), y - (100 * scale), color)
+    drawLine(x - (80 * scale), y - (100 * scale), x - (20 * scale), y - (100 * scale), color)
+    drawLine(x - (20 * scale), y - (100 * scale), x - (20 * scale), y - (90 * scale),color)
     ctx.closePath();
 }
 
-function drawCadafalso(x, y, scale) {
-    ctx.beginPath();
-    drawLine(x, y, x - (100 * scale), y, "black")
-    drawLine(x - (80 * scale), y, x - (80 * scale), y - (100 * scale), "black")
-    drawLine(x - (80 * scale), y - (100 * scale), x - (20 * scale), y - (100 * scale), "black")
-    drawLine(x - (20 * scale), y - (100 * scale), x - (20 * scale), y - (90 * scale), "black")
-    ctx.closePath();
-}
-
-function drawArmLeg(x, y, side, scale) {
+function drawArmLeg(x, y, side, scale,color) {
+    ctx.strokeStyle = color
     ctx.beginPath();
     let endx = x - (40 * scale)
     if (side == "r") {
         endx = x
     }
-    drawLine(x - (20 * scale), y - (70 * scale), endx, y - (45 * scale), "black")
+    drawLine(x - (20 * scale), y - (70 * scale), endx, y - (45 * scale), color)
     ctx.closePath();
 }
-function drawBody(x, y, scale) {
+function drawBody(x, y, scale,color) {
+    ctx.strokeStyle = color
     ctx.beginPath();
     xcalc = x - (20 * scale)
-    drawLine(xcalc, y - (70 * scale), xcalc, y - (40 * scale), "black")
+    drawLine(xcalc, y - (70 * scale), xcalc, y - (40 * scale), color)
     ctx.closePath();
 }
 
-function drawUnderline(x, y, scale, index) {
+function drawUnderline(x, y, scale, index,color) {
+    
     ctx.beginPath();
     let calcPosition = index - 1
     let calcx = x + ((60 * scale) * calcPosition) + (index ? (5 * scale) : 0)
     let calcy = y + (60 * scale)
-    drawLine(calcx, calcy, calcx + (40 * scale), calcy, "black")
+    drawLine(calcx, calcy, calcx + (40 * scale), calcy,color)
     ctx.closePath();
 }
 
-function drawText(text, x, y, scale, size, index,color='black') {
+function drawText(text, x, y, scale, size, index,color) {
     ctx.beginPath();
-
     ctx.fillStyle = color
     let calcPosition = index - 1
     let calcx = x + ((60 * scale) * calcPosition) + (index ? (5 * scale) : 0)
@@ -88,7 +88,6 @@ function drawText(text, x, y, scale, size, index,color='black') {
 function cleanText(x, y, word, scale) {
     size = word.length
     let chars = size >= errors.length ? size+1 : errors.length+1
-    
     ctx.clearRect(x - (60 * scale), y - (10 * scale), (48 * fontSize * chars * scale), (fontSize * 96 * scale));
     errors = []
     currentRightChars = 0;

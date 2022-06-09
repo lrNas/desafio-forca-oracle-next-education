@@ -12,8 +12,12 @@ body{
 }
 #logo{
     margin:1.8vmax;
+    width: 2vmax;
+  height: 3vmax;
 }
-
+.titulo{
+  font-size: 2.2vmax;
+}
 .container{
   margin: 0.5vmin;
   align-items: center;
@@ -21,17 +25,24 @@ body{
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
-    height: fit-content;
+    width: 90%;
+  height: 100%;
+
 }
 #forca{
-  width: 30%;
-  height: 30%;
+  width: 50%;
+  height: 50%;
 }
 input{
-  width:fit-content
+  width:20%;
+  padding: 2vmin;
+  border-radius: 1vmax;
+  font-size: 1.3vmax;
+  border-width: 0.5vmin;
 }
 
-button{
+.btn{
+  font-size: 1.3vmax;
     border-radius: 1vmax;
     padding:1vmax;
     width: fit-content;
@@ -39,19 +50,39 @@ button{
     background-color: #D8DFE8;
     border-color: #0A3871;
     margin: 1vmin;
+  border-width: 0.5vmin;
+
 }
-button:hover{
+.btn:hover{
     scale: 0.95;
+    background-color: #0A3871;
+    color:#D8DFE8;
+    border-color: #D8DFE8;
+}
+.btn:hover:disabled{
+  background-color: #727272 ;
 }
 
 footer{
     padding: 1vmax;
-    margin: 0;
+    position: absolute;
+    bottom: 0;
     padding-bottom: 0;
+    height:fit-content;
 }
 footer h2{
-    font-size: 1.2vmax;
+    font-size: 2vmax;
 }
 footer p{
-    font-size: 1vmax;
+    font-size: 1.5vmax;
+}
+ul{
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 600px) {
+  div.example {
+    display: none;
+  }
 }
